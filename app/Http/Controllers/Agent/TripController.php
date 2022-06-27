@@ -139,9 +139,6 @@ class TripController extends Controller
             'reserved_driver' => new RequiredIf($request->reserved_driver_id && $request->reserved_driver_id['id'] ==38  ),
 
         ]);
-
-
-
         try {
             \DB::beginTransaction();
 

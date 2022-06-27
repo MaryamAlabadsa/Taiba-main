@@ -17,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('logout', [\App\Http\Controllers\Agent\Api\AgentController::class, 'logout']);
+    Route::prefix('reservation')->group(function () {
+        Route::post('', [\App\Http\Controllers\Agent\Api\AgentController::class, 'store']);
+        Route::post('duplicate/{trip}', [\App\Http\Controllers\Agent\Api\AgentController::class, 'duplicate']);
+        Route::get('', [\App\Http\Controllers\Agent\Api\AgentController::class, 'index']);
+        Route::delete('{trip?}', [\App\Http\Controllers\Agent\Api\AgentController::class, 'destroy']);
+        Route::put('{trip}', [\App\Http\Controllers\Agent\Api\AgentController::class, 'update']);
+
+    });
+
+});
+Route::post('login', [\App\Http\Controllers\Agent\Api\AgentController::class, 'login']);
